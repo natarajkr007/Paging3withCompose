@@ -17,4 +17,7 @@ interface DummyProductsDao {
 
     @Query("SELECT * FROM DummyProduct")
     fun getAllProducts(): PagingSource<Int, DummyProduct>
+
+    @Query("SELECT COUNT(*) FROM DummyProduct")
+    suspend fun getCount(): Int
 }

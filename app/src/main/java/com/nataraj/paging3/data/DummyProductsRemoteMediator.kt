@@ -1,5 +1,6 @@
 package com.nataraj.paging3.data
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -17,17 +18,20 @@ class DummyProductsRemoteMediator : RemoteMediator<Int, DummyProduct>() {
         state: PagingState<Int, DummyProduct>
     ): MediatorResult {
         return try {
+            Log.d("logger", "Load type: ${loadType.name}")
             val skip = when (loadType) {
                 LoadType.REFRESH -> 0
 
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
 
                 LoadType.APPEND -> {
-                    val itemsLoaded = state.pages.sumOf { it.data.size }
+                    val itemsLoaded =
+                        InMemoryDatabaseProvider.INSTANCE.dummyProductsDao().getCount()
                     itemsLoaded
                 }
             }
 
+            Log.d("logger", "skip count: $skip")
             val response = dummyProductsService.fetchProducts(
                 state.config.pageSize,
                 skip
