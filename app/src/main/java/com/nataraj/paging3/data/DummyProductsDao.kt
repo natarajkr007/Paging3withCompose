@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 
 /**
  * @author nataraj-7085
@@ -20,4 +21,7 @@ interface DummyProductsDao {
 
     @Query("SELECT COUNT(*) FROM DummyProduct")
     suspend fun getCount(): Int
+
+    @Update
+    suspend fun markItChecked(dummyProduct: DummyProduct)
 }

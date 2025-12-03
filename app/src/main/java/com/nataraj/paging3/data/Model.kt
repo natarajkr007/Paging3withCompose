@@ -21,7 +21,7 @@ data class DummyProductResponse(
 @Serializable
 data class DummyProduct(
     @PrimaryKey val id: Int,
-    val title: String = "",
+    var title: String = "",
     val description: String = "",
     val category: String = "",
     val price: Double = 0.0,
