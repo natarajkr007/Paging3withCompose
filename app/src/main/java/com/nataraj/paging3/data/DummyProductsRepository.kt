@@ -15,15 +15,19 @@ class DummyProductsRepository {
     @OptIn(ExperimentalPagingApi::class)
     fun fetchProducts(): Pager<Int, DummyProduct> {
         return Pager(
-            config = PagingConfig(
-                pageSize = 50,
-                enablePlaceholders = false,
-                initialLoadSize = 50,
-                prefetchDistance = 10
-            ),
+            config = PAGING_CONFIG,
             remoteMediator = DummyProductsRemoteMediator()
         ) {
             dummyProductsDao.getAllProducts()
         }
+    }
+
+    companion object {
+        val PAGING_CONFIG = PagingConfig(
+            pageSize = 50,
+            enablePlaceholders = false,
+            initialLoadSize = 50,
+            prefetchDistance = 10
+        )
     }
 }
