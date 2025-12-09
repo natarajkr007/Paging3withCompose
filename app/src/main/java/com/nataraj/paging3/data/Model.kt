@@ -41,7 +41,8 @@ data class DummyProduct(
     val minimumOrderQuantity: Int = 0,
 //    val meta: Meta,
 //    val images: List<String>,
-    val thumbnail: String = ""
+    val thumbnail: String = "",
+    val isClicked: Boolean = false
 )
 
 @Serializable
