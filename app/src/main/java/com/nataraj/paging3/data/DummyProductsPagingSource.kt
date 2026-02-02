@@ -17,7 +17,7 @@ class DummyProductsPagingSource : PagingSource<Int, DummyProduct>() {
                     this::class.simpleName,
                     "refresh - key ${params.key} & loadSize - ${params.loadSize}"
                 )
-                fetchDummyProducts(0, params.loadSize)
+                fetchDummyProducts(params.key ?: 0, params.loadSize)
             }
 
             is LoadParams.Append<Int> -> {

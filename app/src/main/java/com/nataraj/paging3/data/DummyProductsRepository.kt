@@ -1,6 +1,5 @@
 package com.nataraj.paging3.data
 
-import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 
@@ -12,14 +11,22 @@ class DummyProductsRepository {
 
     private val dummyProductsDao = InMemoryDatabaseProvider.INSTANCE.dummyProductsDao()
 
-    @OptIn(ExperimentalPagingApi::class)
+//    @OptIn(ExperimentalPagingApi::class)
+//    fun fetchProducts(): Pager<Int, DummyProduct> {
+//        return Pager(
+//            config = PAGING_CONFIG,
+//            remoteMediator = DummyProductsRemoteMediator()
+//        ) {
+//            dummyProductsDao.getAllProducts()
+//        }
+//    }
+
     fun fetchProducts(): Pager<Int, DummyProduct> {
         return Pager(
             config = PAGING_CONFIG,
-            remoteMediator = DummyProductsRemoteMediator()
-        ) {
-            dummyProductsDao.getAllProducts()
-        }
+            initialKey = 0,
+            pagingSourceFactory = { DummyProductsPagingSource() }
+        )
     }
 
     companion object {
